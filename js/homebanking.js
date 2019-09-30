@@ -1,5 +1,9 @@
 //Declaración de variables
 
+var nombreUsuario = 'Lucas Della Sala';
+var saldoCuenta = 32000;
+var limiteExtraccion = 10000;
+
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML.
 window.onload = function() {
     cargarNombreEnPantalla();
@@ -18,6 +22,12 @@ function extraerDinero() {
 }
 
 function depositarDinero() {
+    var stringDeposito = prompt('Cuánto dinero desea depositar?');
+    var deposito = parseInt(stringDeposito);
+    var saldoAnterior = saldoCuenta;
+    sumarDinero(deposito);
+    actualizarSaldoEnPantalla();
+    alert('Saldo anterior: '+ saldoAnterior +'\nMonto depositado: '+ deposito + '\nSaldo actual: '+saldoCuenta);
 
 }
 
@@ -31,6 +41,14 @@ function transferirDinero() {
 
 function iniciarSesion() {
 
+}
+
+function sumarDinero (ingresoDinero) {
+    saldoCuenta=saldoCuenta+ingresoDinero;
+}
+
+function restarDinero (egresoDinero) {
+    saldoCuenta=saldoCuenta-egresoDinero;
 }
 
 //Funciones que actualizan el valor de las variables en el HTML
