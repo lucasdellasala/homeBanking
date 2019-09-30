@@ -18,7 +18,12 @@ function cambiarLimiteDeExtraccion() {
 }
 
 function extraerDinero() {
-
+    var stringRetiro = prompt('Cuánto dinero desea retirar?');
+    var retiro = parseInt(stringRetiro);
+    var saldoAnterior = saldoCuenta;
+    restarDinero(retiro);
+    actualizarSaldoEnPantalla();
+    alert('Saldo anterior: '+ saldoAnterior +'\nMonto depositado: '+ retiro + '\nSaldo actual: '+saldoCuenta);
 }
 
 function depositarDinero() {
