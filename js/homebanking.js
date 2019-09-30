@@ -23,7 +23,7 @@ function extraerDinero() {
     var saldoAnterior = saldoCuenta;
     restarDinero(retiro);
     actualizarSaldoEnPantalla();
-    alert('Saldo anterior: '+ saldoAnterior +'\nMonto depositado: '+ retiro + '\nSaldo actual: '+saldoCuenta);
+    alert('Saldo anterior: '+ saldoAnterior +'\nMonto extraído: '+ retiro + '\nSaldo actual: '+saldoCuenta);
 }
 
 function depositarDinero() {
