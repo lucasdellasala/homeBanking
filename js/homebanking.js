@@ -1,7 +1,7 @@
 //Declaración de variables
 
 var nombreUsuario = 'Lucas Della Sala';
-var saldoCuenta = 32000;
+var saldoCuenta = 10000;
 var limiteExtraccion = 10000;
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML.
@@ -19,11 +19,27 @@ function cambiarLimiteDeExtraccion() {
 
 function extraerDinero() {
     var stringRetiro = prompt('Cuánto dinero desea retirar?');
+    alert(stringRetiro);
     var retiro = parseInt(stringRetiro);
+    var aux = Number(stringRetiro);
+    alert(retiro);
+    alert(aux);
     var saldoAnterior = saldoCuenta;
-    restarDinero(retiro);
-    actualizarSaldoEnPantalla();
-    alert('Saldo anterior: '+ saldoAnterior +'\nMonto extraído: '+ retiro + '\nSaldo actual: '+saldoCuenta);
+    if (retiro<saldoCuenta){
+        if (retiro<=limiteExtraccion){
+            if (retiro % 100===0){
+            restarDinero(retiro);
+            actualizarSaldoEnPantalla();
+            alert('Saldo anterior: '+ saldoAnterior +'\nMonto extraído: '+ retiro + '\nSaldo actual: '+saldoCuenta);
+            } else {
+                alert('Solo puedes extraer billetes de $100');
+            }
+        } else {
+            alert('La cantidad de dinero que deseas extraer es mayor a tu límite de extracción');
+        }
+    } else{
+        alert('No hay saldo disponible en tu cuenta para extraer esa cantidad de dinero');
+    }    
 }
 
 function depositarDinero() {
