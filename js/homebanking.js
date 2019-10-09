@@ -19,12 +19,12 @@ function cambiarLimiteDeExtraccion() {
 
 function extraerDinero() {
     var stringRetiro = prompt('Cuánto dinero desea retirar?');
-    validarIngresoNumerico(stringRetiro);
-    //alert(stringRetiro);
-    var retiro = parseInt(stringRetiro);
-    //var aux = Number(stringRetiro);
-    //alert(retiro);
-    //alert(aux);
+    
+    if (!validarIngresoNumerico(stringRetiro))
+        return;
+    
+    var retiro = Number(stringRetiro);
+    
     var saldoAnterior = saldoCuenta;
     if (retiro<saldoCuenta){
         if (retiro<=limiteExtraccion){
@@ -74,31 +74,21 @@ function restarDinero (egresoDinero) {
     saldoCuenta=saldoCuenta-egresoDinero;
 }
 
-function validarIngresoNumerico (aux) {
-    switch(aux){
-        case (isNaN(aux)):
-            alert('No puedes ingresar letras o caracteres especiales');
-            break;
-        case (aux<=0):
-            alert('No puedes ingresar 0 o números negativos');
-            break;
-        
-        }
-    
+function validarIngresoNumerico (aValidar) {
+    if(aValidar == null)
+        return false;  
 
-
-
-    if(isNaN(aux)){
+    if(isNaN(aValidar)){
         alert('No puedes ingresar letras o caracteres especiales');
+        return false;
     } else {
-        if(aux<=0){
+        if(aValidar<=0){
             alert('No puedes ingresar 0 o números negativos');
+            return false;
         } else {
-            if(typeof aux === Object){
-                alert('Ha cancelado la operación');
+            return true;
             } 
         }
-    }
 }
 
 //Funciones que actualizan el valor de las variables en el HTML
@@ -113,3 +103,4 @@ function actualizarSaldoEnPantalla() {
 function actualizarLimiteEnPantalla() {
     document.getElementById("limite-extraccion").innerHTML = "Tu límite de extracción es: $" + limiteExtraccion;
 }
+
