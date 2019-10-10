@@ -3,6 +3,13 @@
 var nombreUsuario = 'Lucas Della Sala';
 var saldoCuenta = 10000;
 var limiteExtraccion = 10000;
+var agua = 350;
+var telefono = 425;
+var luz = 210;
+var internet = 570;
+var cuentaAmiga1 = 1234567;
+var cuentaAmiga2 = 7654321;
+
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML.
 window.onload = function() {
@@ -24,28 +31,17 @@ function extraerDinero() {
         return;
     
     var retiro = Number(stringRetiro);
+
+    validarSaldoCuenta(retiro);
     
-    var saldoAnterior = saldoCuenta;
-    if (retiro<saldoCuenta){
-        if (retiro<=limiteExtraccion){
-            if (retiro % 100===0){
-            restarDinero(retiro);
-            actualizarSaldoEnPantalla();
-            alert('Saldo anterior: '+ saldoAnterior +'\nMonto extraído: '+ retiro + '\nSaldo actual: '+saldoCuenta);
-            } else {
-                alert('Solo puedes extraer billetes de $100');
-            }
-        } else {
-            alert('La cantidad de dinero que deseas extraer es mayor a tu límite de extracción');
-        }
-    } else{
-        alert('No hay saldo disponible en tu cuenta para extraer esa cantidad de dinero');
-    }    
 }
 
 function depositarDinero() {
     var stringDeposito = prompt('Cuánto dinero desea depositar?');
-    var deposito = parseInt(stringDeposito);
+    if (!validarIngresoNumerico(stringDeposito))
+        return;
+
+    var deposito = Number(stringDeposito);
     var saldoAnterior = saldoCuenta;
     sumarDinero(deposito);
     actualizarSaldoEnPantalla();
@@ -54,11 +50,72 @@ function depositarDinero() {
 }
 
 function pagarServicio() {
+    var seleccionServicio = prompt('Ingrese el número que corresponde para el servicio que queres pagar:\n1-Agua\n2-Luz\n3-Internet\n4-Teléfono');
 
+    if(seleccionServicio == null){
+        return;  
+    }
+
+    switch (seleccionServicio) {
+        case '1':
+            if (saldoCuenta >= agua){
+                var saldoAnterior = saldoCuenta;
+                restarDinero(agua);
+                actualizarSaldoEnPantalla();
+                alert('Saldo anterior: '+ saldoAnterior +'\nDinero descontado: '+ agua + '\nSaldo actual: '+saldoCuenta);
+            } else {
+                alert('No hay suficiente saldo en tu cuenta para pagar este servicio');
+            }
+            break;
+        case '2':
+            if (saldoCuenta>=telefono){
+                var saldoAnterior = saldoCuenta;
+                restarDinero(telefono);
+                actualizarSaldoEnPantalla();
+                alert('Saldo anterior: '+ saldoAnterior +'\nDinero descontado: '+ telefono + '\nSaldo actual: '+saldoCuenta);
+            } else {
+                alert('No hay suficiente saldo en tu cuenta para pagar este servicio');
+            }
+            break;
+        case '3':
+            if (saldoCuenta>=luz){
+                var saldoAnterior = saldoCuenta;
+                restarDinero(luz);
+                actualizarSaldoEnPantalla();
+                alert('Saldo anterior: '+ saldoAnterior +'\nDinero descontado: '+ luz + '\nSaldo actual: '+saldoCuenta);
+            } else {
+                alert('No hay suficiente saldo en tu cuenta para pagar este servicio');
+            }
+            break;
+        case '4':
+            if (saldoCuenta>=internet){
+                var saldoAnterior = saldoCuenta;
+                restarDinero(internet);
+                actualizarSaldoEnPantalla();
+                alert('Saldo anterior: '+ saldoAnterior +'\nDinero descontado: '+ internet + '\nSaldo actual: '+saldoCuenta);
+            } else {
+                alert('No hay suficiente saldo en tu cuenta para pagar este servicio');
+            }
+            break;
+        default:
+            alert('Por favor, ingrese solamente una de las opciones listadas');
+    }
 }
 
-function transferirDinero() {
 
+//Falta terminar esto y corregir el tema de validaciones de saldocuenta
+function transferirDinero() {
+    var stringTransferencia = prompt('Ingrese el monto que desea transferir');
+    if (!validarIngresoNumerico(stringTransferencia))
+        return;
+    var transferencia = Number (stringTransferencia);
+
+    validarSaldoCuenta(transferencia);
+
+    var stringNumeroCuenta = prompt('Ingrese el numero de cuenta a la que desea realizar la transferencia');
+
+    
+    
 }
 
 function iniciarSesion() {
@@ -89,6 +146,26 @@ function validarIngresoNumerico (aValidar) {
             return true;
             } 
         }
+}
+
+function validarSaldoCuenta (aValidar){
+    var saldoAnterior = saldoCuenta;
+
+    if (aValidar<=saldoCuenta){
+        if (aValidar<=limiteExtraccion){
+            if (aValidar % 100===0){
+            restarDinero(aValidar);
+            actualizarSaldoEnPantalla();
+            alert('Saldo anterior: '+ saldoAnterior +'\nMonto extraído: '+ aValidar + '\nSaldo actual: '+saldoCuenta);
+            } else {
+                alert('Solo puedes extraer billetes de $100');
+            }
+        } else {
+            alert('La cantidad de dinero que deseas extraer es mayor a tu límite de extracción');
+        }
+    } else{
+        alert('No hay saldo disponible en tu cuenta para extraer esa cantidad de dinero');
+    }    
 }
 
 //Funciones que actualizan el valor de las variables en el HTML
