@@ -22,10 +22,19 @@ window.onload = function() {
     
 }
 
-
 //Funciones que tenes que completar
 function cambiarLimiteDeExtraccion() {
+    var stringNuevoLimiteExtraccion = prompt ('Ingrese el nuevo límite de extracción que desea tener');
+    
+    if (!validarIngresoNumerico(stringNuevoLimiteExtraccion))
+        return;
+    
+    var nuevoLimiteExtraccion = Number(stringNuevoLimiteExtraccion);
+    
+    limiteExtraccion = nuevoLimiteExtraccion;
 
+    actualizarLimiteEnPantalla();
+    alert ('Su nuevo límite de extracción es $' + limiteExtraccion);
 }
 
 function extraerDinero() {
@@ -106,7 +115,6 @@ function pagarServicio() {
     }
 }
 
-
 function transferirDinero() {
     var stringTransferencia = prompt('Ingrese el monto que desea transferir');
     if (!validarIngresoNumerico(stringTransferencia))
@@ -156,9 +164,6 @@ function iniciarSesion() {
         restarDinero(saldoCuenta);
         actualizarSaldoEnPantalla();
     }
-    
-    
-
 }
 
 //Funciones recurrentes
