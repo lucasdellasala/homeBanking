@@ -19,7 +19,6 @@ window.onload = function() {
     actualizarSaldoEnPantalla();
     actualizarLimiteEnPantalla();
     iniciarSesion();
-    
 }
 
 //Funciones que tenes que completar
@@ -46,7 +45,6 @@ function extraerDinero() {
     var retiro = Number(stringRetiro);
 
     validarSaldoCuenta(retiro);
-    
 }
 
 function depositarDinero() {
@@ -59,7 +57,6 @@ function depositarDinero() {
     sumarDinero(deposito);
     actualizarSaldoEnPantalla();
     alert('Saldo anterior: '+ saldoAnterior +'\nMonto depositado: '+ deposito + '\nSaldo actual: '+saldoCuenta);
-
 }
 
 function pagarServicio() {
