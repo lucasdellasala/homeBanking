@@ -103,18 +103,67 @@ function pagarServicio() {
 }
 
 
-//Falta terminar esto y corregir el tema de validaciones de saldocuenta
 function transferirDinero() {
     var stringTransferencia = prompt('Ingrese el monto que desea transferir');
     if (!validarIngresoNumerico(stringTransferencia))
         return;
     var transferencia = Number (stringTransferencia);
 
-    validarSaldoCuenta(transferencia);
-
-    var stringNumeroCuenta = prompt('Ingrese el numero de cuenta a la que desea realizar la transferencia');
-
+    if (transferencia<=saldoCuenta){
+        if (transferencia<=limiteExtraccion){
+            var stringNumeroCuenta = prompt('Ingrese el numero de cuenta a la que desea realizar la transferencia');
+            if (!validarIngresoNumerico(stringNumeroCuenta))
+                return;
+            var numeroCuenta = Number (stringNumeroCuenta);
     
+            switch (numeroCuenta) {
+                case cuentaAmiga1:
+                    var saldoAnterior = saldoCuenta;
+                    restarDinero(transferencia);
+                    actualizarSaldoEnPantalla();
+                    alert('Se han transferido: $'+ transferencia +'\nCuenta destino: '+ cuentaAmiga1);
+                    break;
+                case cuentaAmiga2:
+                        var saldoAnterior = saldoCuenta;
+                        restarDinero(transferencia);
+                        actualizarSaldoEnPantalla();
+                        alert('Se han transferido: $'+ transferencia +'\nCuenta destino: '+ cuentaAmiga2);
+                    break;
+                default:
+                    alert('Por favor, ingrese correctamente el número de cuenta a la que desea realizar la transferencia');
+            }
+    
+        } else {
+            alert('La cantidad de dinero que deseas transferir es mayor a tu límite de extracción');
+        }
+    } else{
+        alert('No hay saldo disponible en tu cuenta para transferir esa cantidad de dinero');
+    }    
+
+
+
+
+    /*var stringNumeroCuenta = prompt('Ingrese el numero de cuenta a la que desea realizar la transferencia');
+    if (!validarIngresoNumerico(stringNumeroCuenta))
+        return;
+    var numeroCuenta = Number (stringNumeroCuenta);
+    
+    switch (numeroCuenta) {
+        case cuentaAmiga1:
+            var saldoAnterior = saldoCuenta;
+            restarDinero(transferencia);
+            actualizarSaldoEnPantalla();
+            alert('Se han transferido: $'+ transferencia +'\nCuenta destino: '+ cuentaAmiga1);
+            break;
+        case cuentaAmiga2:
+                var saldoAnterior = saldoCuenta;
+                restarDinero(transferencia);
+                actualizarSaldoEnPantalla();
+                alert('Se han transferido: $'+ transferencia +'\nCuenta destino: '+ cuentaAmiga2);
+            break;
+        default:
+            alert('Por favor, ingrese solamente una de las opciones listadas');
+    }*/
     
 }
 
