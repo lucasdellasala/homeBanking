@@ -9,13 +9,17 @@ var luz = 210;
 var internet = 570;
 var cuentaAmiga1 = 1234567;
 var cuentaAmiga2 = 7654321;
+var password= 1996;
 
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML.
+
 window.onload = function() {
     cargarNombreEnPantalla();
     actualizarSaldoEnPantalla();
     actualizarLimiteEnPantalla();
+    iniciarSesion();
+    
 }
 
 
@@ -138,36 +142,22 @@ function transferirDinero() {
         }
     } else{
         alert('No hay saldo disponible en tu cuenta para transferir esa cantidad de dinero');
-    }    
-
-
-
-
-    /*var stringNumeroCuenta = prompt('Ingrese el numero de cuenta a la que desea realizar la transferencia');
-    if (!validarIngresoNumerico(stringNumeroCuenta))
-        return;
-    var numeroCuenta = Number (stringNumeroCuenta);
-    
-    switch (numeroCuenta) {
-        case cuentaAmiga1:
-            var saldoAnterior = saldoCuenta;
-            restarDinero(transferencia);
-            actualizarSaldoEnPantalla();
-            alert('Se han transferido: $'+ transferencia +'\nCuenta destino: '+ cuentaAmiga1);
-            break;
-        case cuentaAmiga2:
-                var saldoAnterior = saldoCuenta;
-                restarDinero(transferencia);
-                actualizarSaldoEnPantalla();
-                alert('Se han transferido: $'+ transferencia +'\nCuenta destino: '+ cuentaAmiga2);
-            break;
-        default:
-            alert('Por favor, ingrese solamente una de las opciones listadas');
-    }*/
-    
+    }        
 }
 
 function iniciarSesion() {
+    var stringCodigoVerificacion = prompt ('Por favor ingrese su código de verificación');
+
+    if (stringCodigoVerificacion==password) {
+        alert ('Bienvenido/a ' + nombreUsuario + ' ya puedes comenzar a realizar operaciones.');
+    } else {
+        alert ('Código incorrecto. Tu dinero ha sido retenido por cuestiones de seguridad.');
+        
+        restarDinero(saldoCuenta);
+        actualizarSaldoEnPantalla();
+    }
+    
+    
 
 }
 
